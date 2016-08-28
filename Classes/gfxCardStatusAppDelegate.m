@@ -22,7 +22,6 @@
 
 @implementation gfxCardStatusAppDelegate
 
-@synthesize updater;
 @synthesize menuController;
 
 #pragma mark - Initialization
@@ -76,29 +75,13 @@
     // Initialize the menu bar icon and hook the menu up to it.
     [menuController setupMenu];
 
-    // Show the one-time startup notification asking users to be kind and donate
-    // if they like gfxCardStatus. Then make it go away forever.
-    if (![_prefs boolForKey:kHasSeenOneTimeNotificationKey]) {
-        [GSNotifier showOneTimeNotification];
-        [_prefs setBool:YES forKey:kHasSeenOneTimeNotificationKey];
-    }
-
     // If we're not on 10.8+, fall back to Growl for notifications.
     if (![GSNotifier notificationCenterIsAvailable])
         [GrowlApplicationBridge setGrowlDelegate:[GSNotifier sharedInstance]];
-
-    // Hook up the check for updates on startup preference directly to the
-    // automaticallyChecksForUpdates property on the SUUpdater.
-    updater.automaticallyChecksForUpdates = _prefs.shouldCheckForUpdatesOnStartup;
-
-    [[_prefs rac_signalForKeyPath:kShouldCheckForUpdatesOnStartupKeyPath observer:self] subscribeNext:^(id x) {
-        GTMLoggerDebug(@"Check for updates on startup value changed: %@", x);
-        updater.automaticallyChecksForUpdates = [x boolValue];
-    }];
-
-    // Check for updates if the user has them enabled.
-    if ([_prefs shouldCheckForUpdatesOnStartup])
-        [updater checkForUpdatesInBackground];
+  
+    // Enforce integrated only mode
+    [GSMux setMode:GSSwitcherModeForceIntegrated];
+    [self performSelector:@selector(enforceIntegrated) withObject:nil afterDelay:1.0];
 }
 
 #pragma mark - Termination Notifications
@@ -130,4 +113,19 @@
     [GSNotifier showGPUChangeNotification:gpu];
 }
 
+#pragma mark - Helper methods
+
+- (void)enforceIntegrated
+{
+  [self performSelectorOnMainThread:@selector(setMode) withObject:nil waitUntilDone:NO];
+}
+
+- (void)setMode
+{
+  //[menuController setMode:menuController.integratedOnly];
+  //[menuController.integratedOnly setState:NSOnState];
+  [menuController.statusMenu performActionForItemAtIndex:[menuController.statusMenu indexOfItem:menuController.integratedOnly]];
+  
+  [menuController updateMenu];
+}
 @end

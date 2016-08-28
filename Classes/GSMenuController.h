@@ -13,7 +13,8 @@
 - (void)something;
 @end
 
-@interface GSMenuController : NSObject <NSMenuDelegate> {
+@interface GSMenuController : NSObject <NSMenuDelegate>
+{
     NSStatusItem *_statusItem;
     
     GSPreferences *_prefs;
@@ -27,10 +28,8 @@
 
 // dynamic menu items - these change
 @property (weak) IBOutlet NSMenuItem *versionItem;
-@property (weak) IBOutlet NSMenuItem *updateItem;
 @property (weak) IBOutlet NSMenuItem *preferencesItem;
 @property (weak) IBOutlet NSMenuItem *quitItem;
-@property (weak) IBOutlet NSMenuItem *visitWebsiteItem;
 
 @property (weak) IBOutlet NSMenuItem *currentCard;
 @property (weak) IBOutlet NSMenuItem *currentPowerSource;
@@ -51,7 +50,6 @@
 
 - (IBAction)openAbout:(id)sender;
 - (IBAction)openPreferences:(id)sender;
-- (IBAction)openApplicationURL:(id)sender;
 - (IBAction)quit:(id)sender;
 
 - (IBAction)setMode:(id)sender;

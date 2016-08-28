@@ -5,6 +5,9 @@ build/*
 *.perspectivev3
 project.xcworkspace
 xcuserdata
+Pods
+Build/*
+podfile.lock
 
 # old skool
 .svn

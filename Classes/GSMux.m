@@ -99,7 +99,9 @@ static BOOL getMuxState(io_connect_t connect, uint64_t input, uint64_t *output)
                                            &outputCount); // pointer to the number of scalar output values.
     
     if (kernResult == KERN_SUCCESS)
-        GTMLoggerDebug(@"getMuxState was successful (count=%d, value=0x%08llx).", outputCount, *output);
+    {
+        //GTMLoggerDebug(@"getMuxState was successful (count=%d, value=0x%08llx).", outputCount, *output);
+    }
     else
         GTMLoggerDebug(@"getMuxState returned 0x%08x.", kernResult);
     
@@ -119,7 +121,9 @@ static BOOL setMuxState(io_connect_t connect, muxState state, uint64_t arg)
                                            0);           // pointer to the number of scalar output values.
     
     if (kernResult == KERN_SUCCESS)
-        GTMLoggerDebug(@"setMuxState was successful.");
+    {
+        //GTMLoggerDebug(@"setMuxState was successful.");
+    }
     else
         GTMLoggerDebug(@"setMuxState returned 0x%08x.", kernResult);
     

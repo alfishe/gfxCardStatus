@@ -35,10 +35,8 @@
 @synthesize statusMenu;
 
 @synthesize versionItem;
-@synthesize updateItem;
 @synthesize preferencesItem;
 @synthesize quitItem;
-@synthesize visitWebsiteItem;
 @synthesize currentCard;
 @synthesize currentPowerSource;
 @synthesize switchGPUs;
@@ -170,11 +168,6 @@
     [NSApp activateIgnoringOtherApps:YES];
 }
 
-- (IBAction)openApplicationURL:(id)sender
-{
-    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:kApplicationWebsiteURL]];
-}
-
 - (IBAction)quit:(id)sender
 {
     [[NSApplication sharedApplication] terminate:self];
@@ -256,8 +249,7 @@
 {
     NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     [versionItem setTitle:[Str(@"About") stringByReplacingOccurrencesOfString:@"%%" withString:version]];
-    [visitWebsiteItem setTitle:[Str(visitWebsiteItem.title) stringByReplacingOccurrencesOfString:@"%%" withString:kApplicationWebsiteURL]];
-    NSArray *localized = [NSArray arrayWithObjects:updateItem, preferencesItem,
+    NSArray *localized = [NSArray arrayWithObjects:preferencesItem,
                           quitItem, switchGPUs, integratedOnly, discreteOnly, 
                           dynamicSwitching, dependentProcesses, processList, 
                           nil];
