@@ -4,6 +4,11 @@ by Cody Krieger
 gfxCardStatus is an open-source menu bar application for OS X that allows users
 of dual GPU MacBook Pros to monitor the status of, and switch between said GPUs.
 
+# NEW! Custom v2.4 released
+- Integrated graphics enforced on start. So if gfxCardStatus is executed on login - you'll have discrete adapter disabled automatically. Great feature to prevent overheating and provide workaround for Macbook Pro 2011 discrete video adapter problems
+- Of cause external monitor will be disabled for classic Unibody Macbook Pros (prior to Retina) due to switching to integrated video
+- All ads, links and useless auto-update via Sparkle wiped out. So less memory to consume, no crap in menus and UI
+
 ## Building from source
 
 In order to successfully build gfxCardStatus, you've got to have its submodules
